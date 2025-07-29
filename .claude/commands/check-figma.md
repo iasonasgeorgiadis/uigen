@@ -1,0 +1,1 @@
+Use Figma MCP tools for $ARGUMENTS

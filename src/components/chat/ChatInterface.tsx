@@ -24,19 +24,37 @@ export function ChatInterface() {
 
   return (
     <div className="flex flex-col h-full p-4 overflow-hidden">
-      <ScrollArea ref={scrollAreaRef} className="flex-1 overflow-hidden">
-        <div className="pr-4">
-          <MessageList messages={messages} isLoading={status === "streaming"} />
-        </div>
-      </ScrollArea>
-      <div className="mt-4 flex-shrink-0">
-        <MessageInput
-          input={input}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          isLoading={status === "submitted" || status === "streaming"}
-        />
-      </div>
+      {messages.length === 0 ? (
+        <>
+          <div className="flex-1 flex items-center justify-center">
+            <MessageList messages={messages} isLoading={status === "streaming"} />
+          </div>
+          <div className="mt-4 flex-shrink-0">
+            <MessageInput
+              input={input}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isLoading={status === "submitted" || status === "streaming"}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <ScrollArea ref={scrollAreaRef} className="flex-1 overflow-hidden">
+            <div className="pr-4">
+              <MessageList messages={messages} isLoading={status === "streaming"} />
+            </div>
+          </ScrollArea>
+          <div className="mt-4 flex-shrink-0">
+            <MessageInput
+              input={input}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              isLoading={status === "submitted" || status === "streaming"}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
